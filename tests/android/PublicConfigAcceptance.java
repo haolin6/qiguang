@@ -1,0 +1,18 @@
+package com.haolin.vontlocal;
+import android.content.*;import android.os.*;import org.json.*;import java.io.*;
+
+/** Local synthetic selection and validation tests; no BLE/Wi-Fi operations. */
+public final class PublicConfigAcceptance extends UiAcceptance {
+    JSONObject lamp(long product,String model)throws Exception{return new JSONObject().put("productCode",product).put("modelFromName",model);}
+    JSONObject credential()throws Exception{char[] token=new char[32];java.util.Arrays.fill(token,'0');return new JSONObject().put("model",ScreenbarClient.MODEL).put("mac","02:00:00:00:00:02").put("localip","10.0.2.2").put("token",new String(token));}
+    @Override public void onStart(){int code=0;try{
+        check(Build.HARDWARE.contains("ranchu")||Build.HARDWARE.contains("goldfish"),"emulator only");DeviceStore store=new DeviceStore(context());store.devices.clear();SharedPreferences chosen=context().getSharedPreferences(DeviceTargets.PREFS,0),legacy=context().getSharedPreferences("MainActivity",0);chosen.edit().clear().commit();legacy.edit().clear().commit();
+        String one="02:00:00:00:00:01",two="02:00:00:00:00:02";check(DeviceTargets.vont(context(),store).isEmpty(),"empty registry does not guess a device");store.devices.put(one,lamp(1,"OTHER"));check(DeviceTargets.vont(context(),store).isEmpty(),"unsupported device ignored");store.devices.put(one,lamp(300029,"TLB01"));check(DeviceTargets.vont(context(),store).equals(one),"existing single compatible record is reused");store.devices.put(two,lamp(300029,"TLB01"));check(DeviceTargets.vont(context(),store).isEmpty(),"multiple devices require a selection");legacy.edit().putString("selected",two).commit();check(DeviceTargets.vont(context(),store).equals(two),"legacy device selection is preserved");chosen.edit().putString(DeviceTargets.KEY,one).commit();check(DeviceTargets.vont(context(),store).equals(one),"explicit linked target takes priority");DeviceTargets.remember(context(),store,two);check(DeviceTargets.vont(context(),store).equals(two),"selecting another compatible lamp updates the target");
+        for(String ip:new String[]{"10.0.2.2","172.16.0.2","192.168.0.2"}){check(DeviceTargets.privateAddress(ip),"private numeric IPv4 accepted");ScreenbarClient.validateCredential(credential().put("localip",ip));check(true,"same-model owner credential validated locally");}
+        for(String ip:new String[]{"8.8.8.8","127.0.0.1","169.254.169.254","example.com","::1","10.256.1.1","","10.0.1"}){check(!DeviceTargets.privateAddress(ip),"non-LAN or malformed host rejected");boolean rejected=false;try{ScreenbarClient.validateCredential(credential().put("localip",ip));}catch(Exception expected){rejected=true;}check(rejected,"invalid host fails before transport");}
+        for(String field:new String[]{"model","mac","token"}){boolean rejected=false;try{ScreenbarClient.validateCredential(credential().put(field,"invalid"));}catch(Exception expected){rejected=true;}check(rejected,"invalid credential field rejected: "+field);}
+        chosen.edit().clear().commit();legacy.edit().clear().commit();report.put("status","passed").put("checkCount",count).put("checks",checks).put("runId",runId).put("scope","Synthetic local configuration only; no actual lamp communication");
+    }catch(Exception e){code=1;try{report.put("status","failed").put("error",e.toString()).put("checks",checks).put("runId",runId);}catch(Exception ignored){}}
+        try{ScreenbarClient.atomic(new File(context().getFilesDir(),"public-config-report.json"),report.toString(2).getBytes("UTF-8"));}catch(Exception e){code=1;}Bundle result=new Bundle();result.putString("result",report.toString());finish(code,result);
+    }
+}

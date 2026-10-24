@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='utf-8'?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent">
+  <ImageView android:id="@+id/widget_background_layer" android:layout_width="match_parent" android:layout_height="match_parent" android:src="@drawable/widget_background" android:scaleType="fitXY" android:importantForAccessibility="no" />
+  <LinearLayout android:id="@+id/widget_root" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:paddingLeft="16dp" android:paddingRight="16dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:gravity="center_vertical">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="44dp" android:orientation="horizontal" android:id="@+id/widget_scene_row">
+      <LinearLayout android:id="@+id/widget_work" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/widget_chip_airy" android:gravity="center" android:orientation="horizontal" android:contentDescription="应用办公场景">
+        <ImageView android:id="@+id/widget_work_icon" android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_work" android:importantForAccessibility="no" />
+        <TextView android:id="@+id/widget_work_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3dp" android:text="办公" android:textSize="13sp" android:includeFontPadding="false" android:maxLines="1" android:textColor="#292E2C" />
+      </LinearLayout>
+      <TextView android:layout_width="12dp" android:layout_height="1dp" android:importantForAccessibility="no" />
+      <LinearLayout android:id="@+id/widget_wind_down" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/widget_chip_airy" android:gravity="center" android:orientation="horizontal" android:contentDescription="应用睡前场景">
+        <ImageView android:id="@+id/widget_wind_down_icon" android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_wind_down" android:importantForAccessibility="no" />
+        <TextView android:id="@+id/widget_wind_down_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3dp" android:text="睡前" android:textSize="13sp" android:includeFontPadding="false" android:maxLines="1" android:textColor="#292E2C" />
+      </LinearLayout>
+      <TextView android:layout_width="12dp" android:layout_height="1dp" android:importantForAccessibility="no" />
+      <LinearLayout android:id="@+id/widget_sleep" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:background="@drawable/widget_chip_airy" android:gravity="center" android:orientation="horizontal" android:contentDescription="应用床上场景">
+        <ImageView android:id="@+id/widget_sleep_icon" android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_bed" android:importantForAccessibility="no" />
+        <TextView android:id="@+id/widget_sleep_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3dp" android:text="床上" android:textSize="13sp" android:includeFontPadding="false" android:maxLines="1" android:textColor="#292E2C" />
+      </LinearLayout>
+      <TextView android:layout_width="12dp" android:layout_height="1dp" android:importantForAccessibility="no" />
+      <LinearLayout android:id="@+id/widget_off" android:layout_width="0dp" android:layout_height="match_parent" android:gravity="center" android:background="@drawable/widget_chip_airy" android:contentDescription="两组灯全关" android:orientation="horizontal" android:layout_weight="1">
+        <ImageView android:id="@+id/widget_off_icon" android:layout_width="16dp" android:layout_height="16dp" android:src="@drawable/ic_off" android:importantForAccessibility="no" />
+        <TextView android:id="@+id/widget_off_label" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="3dp" android:text="全关" android:textSize="13sp" android:includeFontPadding="false" android:maxLines="1" />
+      </LinearLayout>
+    </LinearLayout>
+    <TextView android:id="@+id/widget_divider" android:layout_width="match_parent" android:layout_height="0dp" android:layout_marginTop="4dp" android:layout_marginBottom="4dp" android:background="#E7E1D7" android:importantForAccessibility="no" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="44dp" android:gravity="center_vertical" android:orientation="horizontal" android:id="@+id/widget_reminder_row">
+      <LinearLayout android:id="@+id/widget_title_area" android:layout_width="44dp" android:layout_height="match_parent" android:gravity="center" android:contentDescription="打开栖光首页" android:orientation="vertical">
+        <ImageView android:layout_width="18dp" android:layout_height="18dp" android:src="@mipmap/ic_launcher" android:importantForAccessibility="no" />
+        <TextView android:id="@+id/widget_title" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="栖光" android:textSize="9sp" android:textStyle="normal" android:includeFontPadding="false" android:layout_marginTop="2dp" android:maxLines="1" />
+      </LinearLayout>
+      <ImageView android:id="@+id/widget_focus_icon" android:layout_width="0dp" android:layout_height="0dp" android:src="@drawable/ic_timer" android:importantForAccessibility="no" />
+      <LinearLayout android:id="@+id/widget_focus_info" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:layout_marginLeft="12dp" android:gravity="center_vertical" android:orientation="vertical" android:contentDescription="查看办公提醒参数">
+        <TextView android:id="@+id/widget_focus_title" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="提醒休息" android:textSize="13sp" android:textStyle="bold" android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
+        <TextView android:id="@+id/widget_focus_detail" android:layout_width="match_parent" android:layout_height="wrap_content" android:layout_marginTop="2dp" android:text="工作50分钟 · 休息5分钟" android:textSize="11sp" android:includeFontPadding="false" android:maxLines="1" android:ellipsize="end" />
+      </LinearLayout>
+      <TextView android:id="@+id/widget_focus_action" android:layout_width="64dp" android:layout_height="44dp" android:layout_marginLeft="16dp" android:gravity="center" android:text="开始" android:textSize="13sp" android:textStyle="bold" android:includeFontPadding="false" android:background="@drawable/widget_selected_airy" android:contentDescription="办公提醒开始或结束" />
+    </LinearLayout>
+  </LinearLayout>
+</FrameLayout>

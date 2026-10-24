@@ -1,0 +1,33 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.haolin.vontlocal" android:versionCode="11" android:versionName="0.8.3">
+  <uses-sdk android:minSdkVersion="26" android:targetSdkVersion="32"/>
+  <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30"/>
+  <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30"/>
+  <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" android:maxSdkVersion="30"/>
+  <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
+  <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+  <uses-feature android:name="android.hardware.bluetooth_le" android:required="true"/>
+  <uses-permission android:name="android.permission.INTERNET"/>
+  <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+  <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE"/>
+  <uses-permission android:name="android.permission.WAKE_LOCK"/>
+  <application android:label="栖光" android:icon="@mipmap/ic_launcher" android:roundIcon="@mipmap/ic_launcher" android:theme="@style/QiguangLight" android:debuggable="true" android:allowBackup="false" android:supportsRtl="true">
+    <activity android:name=".FocusConfirmActivity" android:exported="false" android:launchMode="singleTop"/>
+    <activity android:name=".FocusSettingsActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
+    <service android:name=".FocusService" android:exported="false" android:foregroundServiceType="connectedDevice"/>
+    <receiver android:name=".FocusStopReceiver" android:exported="false"/>
+    <activity android:name=".WidgetSettingsActivity" android:exported="false"/>
+    <activity android:name=".SettingsActivity" android:exported="false"/>
+    <activity android:name=".ScreenbarActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
+    <activity android:name=".SleepActivity" android:exported="false" android:windowSoftInputMode="adjustResize"/>
+    <service android:name=".LinkService" android:exported="false" android:foregroundServiceType="connectedDevice"/>
+    <receiver android:name=".LinkWidget" android:exported="true" android:label="栖光 · 三个时刻">
+      <intent-filter><action android:name="android.appwidget.action.APPWIDGET_UPDATE"/></intent-filter>
+      <meta-data android:name="android.appwidget.provider" android:resource="@xml/room_widget_info"/>
+    </receiver>
+    <activity android:name=".MainActivity" android:exported="true" android:windowSoftInputMode="adjustResize"/>
+    <activity android:name=".HomeActivity" android:exported="true" android:launchMode="singleTask" android:windowSoftInputMode="adjustResize">
+      <intent-filter><action android:name="android.intent.action.MAIN"/><category android:name="android.intent.category.LAUNCHER"/></intent-filter>
+    </activity>
+  </application>
+</manifest>

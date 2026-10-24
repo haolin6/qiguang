@@ -1,0 +1,7 @@
+{
+  "model": "yeelink.light.lamp22",
+  "did": "<YOUR_DEVICE_ID>",
+  "mac": "<YOUR_DEVICE_MAC>",
+  "localip": "<YOUR_PRIVATE_LAN_IPV4>",
+  "token": "<YOUR_32_HEX_LOCAL_TOKEN>"
+}

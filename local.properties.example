@@ -1,0 +1,4 @@
+# Optional local paths. Copy to ignored local.properties; do not commit filled values.
+sdk.dir=
+jdk.dir=
+store.file=
